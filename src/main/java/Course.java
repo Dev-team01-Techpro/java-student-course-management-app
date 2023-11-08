@@ -2,8 +2,9 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
-@Table(name="courses")
+@Table(name = "courses")
 public class Course {
 
     @Id
@@ -19,24 +20,23 @@ public class Course {
     @Column(name = "course_department")
     private String department;
     @ManyToMany
-    @JoinTable (name = "student_course",
-            joinColumns = @JoinColumn (name="course_id"),
+    @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private List<Student>students=new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
 
     public Course() {
     }
 
-    public Course( String name, String code, int credit, String department) {
-
+    public Course(String name, String code, int credit, String department) {
         this.name = name;
         this.code = code;
         this.credit = credit;
         this.department = department;
     }
 
-    public Course( String name, String code, int credit, String department, List<Student> students) {
-
+    public Course(String name, String code, int credit, String department, List<Student> students) {
         this.name = name;
         this.code = code;
         this.credit = credit;

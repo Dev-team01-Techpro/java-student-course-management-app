@@ -59,7 +59,7 @@ StudentService sınıfında, "courses" listesi bir ArrayList türünde olacaktı
 
 CourseService sınıfında, "students" listesi bir HashSet türünde olacaktır. Bu liste, dersin kayıtlı olduğu tüm öğrencileri içerecektir.
 
-- `addCourse(String name, int code, int credit, String department)`: Derse yeni bir öğrenci eklemek için kullanılır.
+- `addCourse(String name, String code, int credit, String department)`: Derse yeni bir öğrenci eklemek için kullanılır.
 - `removeCourse(String code)`: Dersten bir öğrenciyi kaldırmak için kullanılır.
 - `getAllCourses()`: Dersin kayıtlı olduğu tüm öğrencileri döndürür.
 - `getCourseByCode(String code)`: Verilen ders koduna sahip bir dersi bulmak için kullanılır. Bu metod, ders kodunu parametre olarak alır ve ilgili dersi döndürür. Eğer belirtilen ders koduna sahip bir ders bulunamazsa, `null` değeri döndürülür.

@@ -3,39 +3,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="students")
+@Table(name = "students")
 public class Student {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name="student_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
     private Long id;
-    @Column(name="student_name")
-    private  String name;
-    @Column(name="student_surname")
+    @Column(name = "student_name")
+    private String name;
+    @Column(name = "student_surname")
     private String surname;
-    @Column(name="student_number")
+    @Column(name = "student_number")
     private int studentNumber;
-    @Column(name="student_department")
+    @Column(name = "student_department")
     private String department;
     @ManyToMany
-    @JoinTable(name="student_course",
-               joinColumns = @JoinColumn (name = "student_id"),
-               inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<Course> courses=new ArrayList<>();
+    @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> courses = new ArrayList<>();
 
     public Student() {
     }
 
-    public Student( String name, String surname, int studentNumber, String department) {
-
+    public Student(String name, String surname, int studentNumber, String department) {
         this.name = name;
         this.surname = surname;
         this.studentNumber = studentNumber;
         this.department = department;
     }
 
-    public Student( String name, String surname, int studentNumber, String department, List<Course> courses) {
-
+    public Student(String name, String surname, int studentNumber, String department, List<Course> courses) {
         this.name = name;
         this.surname = surname;
         this.studentNumber = studentNumber;

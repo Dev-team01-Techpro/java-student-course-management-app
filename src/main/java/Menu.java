@@ -1,14 +1,15 @@
 import java.util.Scanner;
 
 public class Menu {
-    
-    StudentService studentService=new StudentService();
-    
-    CourseService courseService=new CourseService();
-    Scanner input= new Scanner(System.in);
+
+    StudentService studentService = new StudentService();
+
+    CourseService courseService = new CourseService();
+    Scanner input = new Scanner(System.in);
+
     public void displayMenu() {
-        
-        boolean exit= true;
+
+        boolean exit = true;
 
         while (exit) {
             System.out.println("İşlem seçiniz:");
@@ -42,34 +43,49 @@ public class Menu {
                     listStudent();
                     break;
                 case 0:
-                    exit=false;
+                    exit = false;
                     break;
                 default:
                     System.out.println("Invalid choice");
                     break;
             }
-
         }
-
     }
 
-    private void listStudent() {
-    }
+    private void addCourse() {
+        input.nextLine();
+        System.out.println("Ders adı : ");
+        String name = input.nextLine();
 
-    private void removeStudent() {
-    }
+        System.out.println("Ders kodu : ");
+        String code = input.nextLine();
 
-    private void addStudent() {
-    }
+        System.out.println("Ders kredisi : ");
+        int credit = input.nextInt();
+        input.nextLine();
 
-    private void listCourse() {
+        System.out.println("Ders Bölümü : ");
+        String department = input.nextLine();
+
+
+
+        courseService.addCourse(name, code, credit, department);
     }
 
     private void removeCourse() {
     }
 
-    private void addCourse() {
-        
+    private void listCourse() {
     }
+
+    private void addStudent() {
+    }
+
+    private void removeStudent() {
+    }
+
+    private void listStudent() {
+    }
+
 
 }
