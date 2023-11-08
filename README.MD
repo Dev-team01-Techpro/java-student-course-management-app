@@ -14,6 +14,7 @@ Student sınıfı, aşağıdaki değişkenleri içerecektir:
 - `surname`: Öğrencinin soyadı, **String** türünde.
 - `studentNumber`: Öğrencinin numarası, **int** türünde.
 - `department`: Öğrencinin bölümü, **String** türünde.
+- `courses`: Dersi alan öğrencilerin listesi, **List<Course>** türünde.
 
 Ayrıca, bu sınıf `@Entity` ve `@Table` annotasyonları ile işaretlenmiştir. Bu, sınıfın bir Hibernate entity sınıfı olduğunu ve "students" adlı bir veritabanı tablosuyla ilişkilendirildiğini belirtir.
 
@@ -33,6 +34,7 @@ Course sınıfı, aşağıdaki değişkenleri içerecektir:
 - `code`: Dersin kodu, **String** türünde.
 - `credit`: Dersin kredisi, **int** türünde.
 - `department`: Dersin bölümü, **String** türünde.
+- `students`: Dersi alan öğrencilerin listesi, **List<Student>** türünde.
 
 Ayrıca, bu sınıf `@Entity` ve `@Table` annotasyonları ile işaretlenmiştir. Bu, sınıfın bir Hibernate entity sınıfı olduğunu ve "courses" adlı bir veritabanı tablosuyla ilişkilendirildiğini belirtir.
 
@@ -51,16 +53,16 @@ StudentService sınıfında, "courses" listesi bir ArrayList türünde olacaktı
 - `addStudent(Student student)`: Öğrenciye yeni bir ders eklemek için kullanılır.
 - `removeStudent(Student student)`: Öğrenciden bir dersi kaldırmak için kullanılır.
 - `getAllStudents()`: Öğrencinin kayıtlı olduğu tüm dersleri döndürür.
-- `getStudentByNumber(int studentNumber)`:
+- `getStudentByNumber(int studentNumber)`: Verilen öğrenci numarasına sahip bir öğrenciyi bulmak için kullanılır. Bu metod, öğrenci numarasını parametre olarak alır ve ilgili öğrenciyi döndürür. Eğer belirtilen öğrenci numarasına sahip bir öğrenci bulunamazsa, `null` değeri döndürülür.
 
 ### CourseService Sınıfı
 
 CourseService sınıfında, "students" listesi bir HashSet türünde olacaktır. Bu liste, dersin kayıtlı olduğu tüm öğrencileri içerecektir.
 
-- `addCourse(Course course)`: Derse yeni bir öğrenci eklemek için kullanılır.
-- `removeCourse(Course course)`: Dersten bir öğrenciyi kaldırmak için kullanılır.
+- `addCourse(String name, int code, int credit, String department)`: Derse yeni bir öğrenci eklemek için kullanılır.
+- `removeCourse(String code)`: Dersten bir öğrenciyi kaldırmak için kullanılır.
 - `getAllCourses()`: Dersin kayıtlı olduğu tüm öğrencileri döndürür.
-- `getCourseByCode(String code)`:
+- `getCourseByCode(String code)`: Verilen ders koduna sahip bir dersi bulmak için kullanılır. Bu metod, ders kodunu parametre olarak alır ve ilgili dersi döndürür. Eğer belirtilen ders koduna sahip bir ders bulunamazsa, `null` değeri döndürülür.
 
 ## Menü Sınıfı
 Uygulamaya aşağıdaki menü eklenecektir:
