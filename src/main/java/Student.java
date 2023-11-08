@@ -26,16 +26,16 @@ public class Student {
     public Student() {
     }
 
-    public Student(Long id, String name, String surname, int studentNumber, String department) {
-        this.id = id;
+    public Student( String name, String surname, int studentNumber, String department) {
+
         this.name = name;
         this.surname = surname;
         this.studentNumber = studentNumber;
         this.department = department;
     }
 
-    public Student(Long id, String name, String surname, int studentNumber, String department, List<Course> courses) {
-        this.id = id;
+    public Student( String name, String surname, int studentNumber, String department, List<Course> courses) {
+
         this.name = name;
         this.surname = surname;
         this.studentNumber = studentNumber;
