@@ -50,8 +50,8 @@ Student ve Course sınıfları arasında bir "many to many" ilişkisi vardır. B
 
 StudentService sınıfında, "courses" listesi bir ArrayList türünde olacaktır. Bu liste, öğrencinin kayıtlı olduğu tüm dersleri içerecektir.
 
-- `addStudent(Student student)`: Öğrenciye yeni bir ders eklemek için kullanılır.
-- `removeStudent(Student student)`: Öğrenciden bir dersi kaldırmak için kullanılır.
+- `addStudent(String name, String surname, int studentNumber, Sring department)`: Öğrenciye yeni bir ders eklemek için kullanılır.
+- `removeStudent(int studentNumber)`: Öğrenciden bir dersi kaldırmak için kullanılır.
 - `getAllStudents()`: Öğrencinin kayıtlı olduğu tüm dersleri döndürür.
 - `getStudentByNumber(int studentNumber)`: Verilen öğrenci numarasına sahip bir öğrenciyi bulmak için kullanılır. Bu metod, öğrenci numarasını parametre olarak alır ve ilgili öğrenciyi döndürür. Eğer belirtilen öğrenci numarasına sahip bir öğrenci bulunamazsa, `null` değeri döndürülür.
 
