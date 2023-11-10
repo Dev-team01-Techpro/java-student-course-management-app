@@ -16,7 +16,7 @@ Student sınıfı, aşağıdaki değişkenleri içerecektir:
 - `id`: Öğrencinin benzersiz idsi, **Long** türünde.
 - `name`: Öğrencinin adı, **String** türünde.
 - `surname`: Öğrencinin soyadı, **String** türünde.
-- `studentNumber`: Öğrencinin numarası, **int** türünde.
+- `studentNumber`: Öğrencinin numarası, **int** türünde benzersiz olmalı ve NULL olmamalı.
 - `department`: Öğrencinin bölümü, **String** türünde.
 - `courses`: Dersi alan öğrencilerin listesi, **List<Course>** türünde.
 
@@ -37,7 +37,7 @@ Course sınıfı, aşağıdaki değişkenleri içerecektir:
 
 - `id`: Dersin benzersiz idsi, **Long** türünde.
 - `name`: Dersin adı, **String** türünde.
-- `code`: Dersin kodu, **String** türünde.
+- `code`: Dersin kodu, **String** türünde benzersiz olmalı ve NULL olmamalı.
 - `credit`: Dersin kredisi, **int** türünde.
 - `department`: Dersin bölümü, **String** türünde.
 - `students`: Dersi alan öğrencilerin listesi, **List<Student>** türünde.

@@ -1,3 +1,5 @@
+import net.bytebuddy.implementation.bind.annotation.Empty;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ public class Student {
     private String name;
     @Column(name = "student_surname")
     private String surname;
-    @Column(name = "student_number")
+    @Column(name = "student_number", unique = true, nullable = false)
     private int studentNumber;
     @Column(name = "student_department")
     private String department;
