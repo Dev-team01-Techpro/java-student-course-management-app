@@ -1,8 +1,12 @@
 # Öğrenci ve Ders Uygulaması
 
-Bu uygulama, iki sınıf olacaktır: Student ve Course. Student sınıfı, bir öğrencinin adını, soyadını, numarasını ve bölümünü içerecektir. Course sınıfı, bir dersin adını, kodunu, kredisini ve bölümünü içerecektir. Bu iki sınıf arasında bir "many to many" ilişkisi olacaktır. Yani, her öğrenci birden fazla derse kayıt olabilir ve her ders birden fazla öğrenciye ait olabilir.
+Bu uygulama, iki sınıf olacaktır: Student ve Course. Student sınıfı, bir öğrencinin adını, soyadını, numarasını ve
+bölümünü içerecektir. Course sınıfı, bir dersin adını, kodunu, kredisini ve bölümünü içerecektir. Bu iki sınıf arasında
+bir "many to many" ilişkisi olacaktır. Yani, her öğrenci birden fazla derse kayıt olabilir ve her ders birden fazla
+öğrenciye ait olabilir.
 
 ## Entity Sınıfları
+
 Bu uygulamada, öğrenci(Student) ve ders(Course) verilerini temsil etmek için iki adet entity sınıf kullanılmaktadır:
 
 ## Student Sınıfı
@@ -16,14 +20,16 @@ Student sınıfı, aşağıdaki değişkenleri içerecektir:
 - `department`: Öğrencinin bölümü, **String** türünde.
 - `courses`: Dersi alan öğrencilerin listesi, **List<Course>** türünde.
 
-Ayrıca, bu sınıf `@Entity` ve `@Table` annotasyonları ile işaretlenmiştir. Bu, sınıfın bir Hibernate entity sınıfı olduğunu ve "students" adlı bir veritabanı tablosuyla ilişkilendirildiğini belirtir.
+Ayrıca, bu sınıf `@Entity` ve `@Table` annotasyonları ile işaretlenmiştir. Bu, sınıfın bir Hibernate entity sınıfı
+olduğunu ve "students" adlı bir veritabanı tablosuyla ilişkilendirildiğini belirtir.
 
 - `@Entity`: Sınıfınızın bir Hibernate entity sınıfı olduğunu belirtir.
 - `@Table`: Veritabanındaki tablo adını belirtir.
 - `@Id`: Birincil anahtar alanını belirtir.
 - `@GeneratedValue`: Birincil anahtarın otomatik olarak artan bir değere sahip olduğunu belirtir.
 - `@Column`: Alanın adını ve diğer özelliklerini belirtir.
-- `@ManyToMany` ve `@JoinTable`: Öğrenci sınıfının, ders sınıfı ile "many to many" ilişkisini belirtir. Bu, ilişkiyi yöneten tablonun adını ve ilişkili alanları belirtir.
+- `@ManyToMany` ve `@JoinTable`: Öğrenci sınıfının, ders sınıfı ile "many to many" ilişkisini belirtir. Bu, ilişkiyi
+  yöneten tablonun adını ve ilişkili alanları belirtir.
 
 ## Course Sınıfı
 
@@ -36,35 +42,47 @@ Course sınıfı, aşağıdaki değişkenleri içerecektir:
 - `department`: Dersin bölümü, **String** türünde.
 - `students`: Dersi alan öğrencilerin listesi, **List<Student>** türünde.
 
-Ayrıca, bu sınıf `@Entity` ve `@Table` annotasyonları ile işaretlenmiştir. Bu, sınıfın bir Hibernate entity sınıfı olduğunu ve "courses" adlı bir veritabanı tablosuyla ilişkilendirildiğini belirtir.
+Ayrıca, bu sınıf `@Entity` ve `@Table` annotasyonları ile işaretlenmiştir. Bu, sınıfın bir Hibernate entity sınıfı
+olduğunu ve "courses" adlı bir veritabanı tablosuyla ilişkilendirildiğini belirtir.
 
 - `@Entity` ve `@Table`: Aynı şekilde sınıfın ve tablonun adını belirtir.
 - `@Id`, `@GeneratedValue` ve `@Column`: Birincil anahtar ve diğer alanlar için aynı işlevi görür.
-- `@ManyToMany` ve `@JoinTable`: Ders sınıfının, öğrenci sınıfı ile "many to many" ilişkisini belirtir. `@JoinTable` ile bağlantı tablosunun adı ve bağlantıları belirtilir.
+- `@ManyToMany` ve `@JoinTable`: Ders sınıfının, öğrenci sınıfı ile "many to many" ilişkisini belirtir. `@JoinTable` ile
+  bağlantı tablosunun adı ve bağlantıları belirtilir.
 
 ## İlişki
 
-Student ve Course sınıfları arasında bir "many to many" ilişkisi vardır. Bu, bir öğrencinin birden fazla derse kayıt olabileceği ve bir dersin birden fazla öğrenciye ait olabileceği anlamına gelir. Bu ilişkiyi modellemek için, her iki sınıfta da bir "courses" listesi oluşturacağız.
+Student ve Course sınıfları arasında bir "many to many" ilişkisi vardır. Bu, bir öğrencinin birden fazla derse kayıt
+olabileceği ve bir dersin birden fazla öğrenciye ait olabileceği anlamına gelir. Bu ilişkiyi modellemek için, her iki
+sınıfta da bir "courses" listesi oluşturacağız.
 
 ### StudentService Sınıfı
 
-StudentService sınıfında, "courses" listesi bir ArrayList türünde olacaktır. Bu liste, öğrencinin kayıtlı olduğu tüm dersleri içerecektir.
+StudentService sınıfında, "courses" listesi bir ArrayList türünde olacaktır. Bu liste, öğrencinin kayıtlı olduğu tüm
+dersleri içerecektir.
 
-- `addStudent(String name, String surname, int studentNumber, Sring department)`: Öğrenciye yeni bir ders eklemek için kullanılır.
+- `addStudent(String name, String surname, int studentNumber, Sring department)`: Öğrenciye yeni bir ders eklemek için
+  kullanılır.
 - `removeStudent(int studentNumber)`: Öğrenciden bir dersi kaldırmak için kullanılır.
 - `getAllStudents()`: Öğrencinin kayıtlı olduğu tüm dersleri döndürür.
-- `getStudentByNumber(int studentNumber)`: Verilen öğrenci numarasına sahip bir öğrenciyi bulmak için kullanılır. Bu metod, öğrenci numarasını parametre olarak alır ve ilgili öğrenciyi döndürür. Eğer belirtilen öğrenci numarasına sahip bir öğrenci bulunamazsa, `null` değeri döndürülür.
+- `getStudentByNumber(int studentNumber)`: Verilen öğrenci numarasına sahip bir öğrenciyi bulmak için kullanılır. Bu
+  metod, öğrenci numarasını parametre olarak alır ve ilgili öğrenciyi döndürür. Eğer belirtilen öğrenci numarasına sahip
+  bir öğrenci bulunamazsa, `null` değeri döndürülür.
 
 ### CourseService Sınıfı
 
-CourseService sınıfında, "students" listesi bir HashSet türünde olacaktır. Bu liste, dersin kayıtlı olduğu tüm öğrencileri içerecektir.
+CourseService sınıfında, "students" listesi bir HashSet türünde olacaktır. Bu liste, dersin kayıtlı olduğu tüm
+öğrencileri içerecektir.
 
 - `addCourse(String name, String code, int credit, String department)`: Derse yeni bir öğrenci eklemek için kullanılır.
 - `removeCourse(String code)`: Dersten bir öğrenciyi kaldırmak için kullanılır.
 - `getAllCourses()`: Dersin kayıtlı olduğu tüm öğrencileri döndürür.
-- `getCourseByCode(String code)`: Verilen ders koduna sahip bir dersi bulmak için kullanılır. Bu metod, ders kodunu parametre olarak alır ve ilgili dersi döndürür. Eğer belirtilen ders koduna sahip bir ders bulunamazsa, `null` değeri döndürülür.
+- `getCourseByCode(String code)`: Verilen ders koduna sahip bir dersi bulmak için kullanılır. Bu metod, ders kodunu
+  parametre olarak alır ve ilgili dersi döndürür. Eğer belirtilen ders koduna sahip bir ders bulunamazsa, `null` değeri
+  döndürülür.
 
 ## Menü Sınıfı
+
 Uygulamaya aşağıdaki menü eklenecektir:
 
 1. Ders ekle
@@ -81,11 +99,17 @@ Uygulamaya bir menü eklemek için aşağıdaki kod kullanılabilir:
 import java.util.Scanner;
 
 public class Menu {
-    // Öğrenci sınıfı örneği oluşturma
-    Ogrenci ogrenci1 = new Ogrenci("Mustafa", "Yılmaz", 123456, "Bilgisayar Mühendisliği");
+        // Öğrenci sınıfı örneği oluşturma
+        Student student2 = new Student("Ahmet", "Yılmaz", 111, "Bilgisayar Mühendisliği");
+        Student student2 = new Student("Ayşe", "Kaya", 222, "Elektrik Elektronik Mühendisliği");
+        Student student3 = new Student("Mehmet", "Öztürk", 333, "Makine Mühendisliği");
+        Student student4 = new Student"Mustafa", "Yılmaz", 123456, "Bilgisayar Mühendisliği");
 
-    // Ders sınıfı örneği oluşturma
-    Ders ders1 = new Ders("Yazılım Geliştirme", 101, 3, "Bilgisayar Mühendisliği");
+        // Kurs oluştur
+        Course course1 = new Course("Java'ya Giriş", "BM101", 3, "Bilgisayar Mühendisliği");
+        Course course2 = new Course("Veritabanı Yönetimi", "BM201", 4, "Bilgisayar Mühendisliği");
+        Course course3 = new Course("Elektrik Devreleri", "EE101", 3, "Elektrik Elektronik Mühendisliği");
+        Course course4 = new Course("Yazılım Geliştirme", "BM301", 5, "Bilgisayar Mühendisliği");
 
     Scanner input = new Scanner(System.in);
     
