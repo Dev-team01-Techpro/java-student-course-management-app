@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Menu {
@@ -31,7 +32,7 @@ public class Menu {
                     removeCourse();
                     break;
                 case 3:
-                    listCourse();
+                    listAllCourses();
                     break;
                 case 4:
                     addStudent();
@@ -73,9 +74,16 @@ public class Menu {
     }
 
     private void removeCourse() {
+
+        System.out.println("Lütfen silmek istediğiniz kursun ID'sini giriniz...");
+        String code=input.next();
+        courseService.removeCourse(code);
     }
 
-    private void listCourse() {
+
+
+    private void listAllCourses() {
+        courseService.getAllCourses();
     }
 
     private void addStudent() {
