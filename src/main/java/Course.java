@@ -19,7 +19,7 @@ public class Course {
     private int credit;
     @Column(name = "course_department")
     private String department;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "student_course",
             joinColumns = @JoinColumn(name = "course_id"),

@@ -37,6 +37,25 @@ public class CourseService {
         return courseList.get(0).getCode();
     }
 
+    public Course getCourse(String code) {
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
+
+        String hql = "FROM Course c WHERE c.code=:code";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
+        //String hql="FROM Course c WHERE c.code="+id; int degisken icin buna gerek yok.
+        List<Course> courseList = session.createQuery(hql, Course.class).setParameter("code", code).getResultList();
+
+//        for (Course course : courseList)
+//        {
+//            System.out.println(course);
+//        }
+
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
+        return courseList.get(0);
+    }
+
     public void removeCourse(String code) {
 
         String codeDb = getCourseByCode(code);

@@ -7,18 +7,36 @@ import java.util.List;
 
 public class StudentService {
 
-    public void addStudent(String name, String surname, int studentNumber, String department) {
-        Session session = HibernateUtilities.openSession();
-        HibernateUtilities.beginTransaction(session);
+    public void addStudent(String name, String surname, int studentNumber, String department, Course course) {
+        Configuration con = new Configuration().configure("hibernate.cfg.xml").
+                addAnnotatedClass(Course.class).addAnnotatedClass(Student.class);
+        SessionFactory sf = con.buildSessionFactory();
+        Session session = sf.openSession();
+        Transaction tx = session.beginTransaction();
+        Student student= new Student(name, surname, studentNumber, department, course);
+//       // student.getCourses().add(course);
+        session.save(student);
 
-//        Course course = new Course(name, code, credit, department);
-//        session.save(course);
 
-        HibernateUtilities.commitTransaction(session);
-        HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
-        // Get student
-        //studentin cursunu getir ogrenciye kursu ekle
+        tx.commit();
+        session.close();
+        sf.close();
+
+
+
+//        Session session = HibernateUtilities.openSession();
+//        HibernateUtilities.beginTransaction(session);
+//
+//
+//        Student student= new Student(name, surname, studentNumber, department, course);
+//       // student.getCourses().add(course);
+//        session.save(student);
+//
+//        HibernateUtilities.commitTransaction(session);
+//        HibernateUtilities.closeSession(session);
+//        HibernateUtilities.closeSessionFactory();
+
+
     }
 
     public void removeStudent(int studentNumber) {

@@ -108,8 +108,26 @@ public class Menu {
     }
 
     private void addStudent() {
+      input.nextLine();
+        System.out.println("Öğrenci Adı : ");
+        String name = input.nextLine();
 
-//        studentService.addStudent()
+        System.out.println("Öğrenci Soyadı : ");
+        String surname = input.nextLine();
+
+        System.out.println("Öğrenci Numarası : ");
+        int studentNumber = input.nextInt();
+        input.nextLine();
+
+        // Burada ogrenci nesnesiyle course nesnesi arasinda baglantiyi yapicak kismi yaziyoruz
+        System.out.println("Kaydetmek istediginiz Bolum Kodu: ");
+        String departmentCode = input.nextLine();
+
+        Course course=courseService.getCourse(departmentCode);
+
+        String department=course.getName();
+
+        studentService.addStudent(name, surname, studentNumber, department, course);
     }
 
     private void removeStudent() {

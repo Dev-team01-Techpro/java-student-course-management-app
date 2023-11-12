@@ -36,12 +36,12 @@ public class Student {
         this.department = department;
     }
 
-    public Student(String name, String surname, int studentNumber, String department, List<Course> courses) {
+    public Student(String name, String surname, int studentNumber, String department, Course course) {
         this.name = name;
         this.surname = surname;
         this.studentNumber = studentNumber;
         this.department = department;
-        this.courses = courses;
+        this.courses.add(course);
     }
 
     public Long getId() {
