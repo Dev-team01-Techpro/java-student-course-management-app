@@ -1,2 +1,71 @@
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import java.util.List;
+
 public class StudentService {
+
+    public void addStudent(String name, String surname, int studentNumber, String department) {
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
+
+//        Course course = new Course(name, code, credit, department);
+//        session.save(course);
+
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
+        // Get student
+        //studentin cursunu getir ogrenciye kursu ekle
+    }
+
+    public void removeStudent(int studentNumber) {
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
+
+
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
+    }
+
+    public void getAllStudents() {
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
+
+
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
+    }
+
+    public int getStudentByNumber(int studentNumber) {
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
+
+
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
+        return 0;
+    }
+
+    public void saveTestData(Student student1, Student student2, Student student3, Student student4) {
+        Configuration con = new Configuration().configure("hibernate.cfg.xml").
+                addAnnotatedClass(Course.class).addAnnotatedClass(Student.class);
+        SessionFactory sf = con.buildSessionFactory();
+        Session session = sf.openSession();
+        Transaction tx = session.beginTransaction();
+
+        session.save(student1);
+        session.save(student2);
+        session.save(student3);
+        session.save(student4);
+
+        tx.commit();
+        session.close();
+        sf.close();
+    }
 }

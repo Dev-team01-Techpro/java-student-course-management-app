@@ -7,29 +7,22 @@ import java.util.List;
 
 public class CourseService {
     public void addCourse(String name, String code, int credit, String department) {
-        Configuration con = new Configuration().configure("hibernate.cfg.xml").
-                addAnnotatedClass(Course.class).addAnnotatedClass(Student.class);
-        SessionFactory sf = con.buildSessionFactory();
-        Session session = sf.openSession();
-        Transaction tx = session.beginTransaction();
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
 
         Course course = new Course(name, code, credit, department);
-
         session.save(course);
-        tx.commit();
-        session.close();
-        sf.close();
+
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
     }
 
-    public String getCourseByCode(String code){
+    public String getCourseByCode(String code) {
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
 
-        Configuration con = new Configuration().configure("hibernate.cfg.xml").
-                addAnnotatedClass(Course.class).addAnnotatedClass(Student.class);
-        SessionFactory sf = con.buildSessionFactory();
-        Session session = sf.openSession();
-        Transaction tx = session.beginTransaction();
-
-        String hql="FROM Course c WHERE c.code=:code";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
+        String hql = "FROM Course c WHERE c.code=:code";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
         //String hql="FROM Course c WHERE c.code="+id; int degisken icin buna gerek yok.
         List<Course> courseList = session.createQuery(hql, Course.class).setParameter("code", code).getResultList();
 
@@ -38,53 +31,57 @@ public class CourseService {
 //            System.out.println(course);
 //        }
 
-        tx.commit();
-        session.close();
-        sf.close();
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
         return courseList.get(0).getCode();
     }
 
-    public void removeCourse(String code){
+    public void removeCourse(String code) {
 
-       String codeDb= getCourseByCode(code);
+        String codeDb = getCourseByCode(code);
 
-        Configuration con = new Configuration().configure("hibernate.cfg.xml").
-                addAnnotatedClass(Course.class).addAnnotatedClass(Student.class);
-        SessionFactory sf = con.buildSessionFactory();
-        Session session = sf.openSession();
-        Transaction tx = session.beginTransaction();
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
 
-        String hql="DELETE FROM Course c WHERE c.code=:codeDb";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
+        String hql = "DELETE FROM Course c WHERE c.code=:codeDb";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
         //String hql="FROM Course c WHERE c.code="+id; int degisken icin buna gerek yok.
         int deleteResult = session.createQuery(hql).setParameter("codeDb", codeDb).executeUpdate();
 
-       System.out.println("deleteResult = " + deleteResult);
-        tx.commit();
-        session.close();
-        sf.close();
-
+        System.out.println("deleteResult = " + deleteResult);
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
     }
 
-    public void getAllCourses(){
+    public void getAllCourses() {
 
-        Configuration con = new Configuration().configure("hibernate.cfg.xml").
-                addAnnotatedClass(Course.class).addAnnotatedClass(Student.class);
-        SessionFactory sf = con.buildSessionFactory();
-        Session session = sf.openSession();
-        Transaction tx = session.beginTransaction();
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
 
-        String hql="FROM Course";
+        String hql = "FROM Course";
         List<Course> courseList = session.createQuery(hql, Course.class).getResultList();
 
-        for (Course course : courseList)
-        {
+        for (Course course : courseList) {
             System.out.println(course);
         }
 
-        tx.commit();
-        session.close();
-        sf.close();
-
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
     }
 
+    public void saveTestData(Course course1, Course course2, Course course3, Course course4) {
+        Session session = HibernateUtilities.openSession();
+        HibernateUtilities.beginTransaction(session);
+
+        session.save(course1);
+        session.save(course2);
+        session.save(course3);
+        session.save(course4);
+
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
+        HibernateUtilities.closeSessionFactory();
+    }
 }

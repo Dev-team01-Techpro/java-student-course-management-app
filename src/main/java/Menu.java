@@ -20,6 +20,7 @@ public class Menu {
             System.out.println("4. Öğrenci ekle");
             System.out.println("5. Öğrenci sil");
             System.out.println("6. Öğrencileri listele");
+            System.out.println("7. Test verileri olustur");
             System.out.println("0. Çıkış");
 
             int choice = input.nextInt();
@@ -43,6 +44,9 @@ public class Menu {
                 case 6:
                     listStudent();
                     break;
+                case 7:
+                    saveTest();
+                    break;
                 case 0:
                     exit = false;
                     break;
@@ -51,6 +55,27 @@ public class Menu {
                     break;
             }
         }
+    }
+
+    private void saveTest() {
+        // Öğrenci sınıfı örneği oluşturma
+        Student student1 = new Student("Ahmet", "Yılmaz", 111, "Bilgisayar Mühendisliği");
+        Student student2 = new Student("Ayşe", "Kaya", 222, "Elektrik Elektronik Mühendisliği");
+        Student student3 = new Student("Mehmet", "Öztürk", 333, "Makine Mühendisliği");
+        Student student4 = new Student("Mustafa", "Yılmaz", 444, "Bilgisayar Mühendisliği");
+
+        // Kurs oluştur
+        Course course1 = new Course("Java'ya Giriş", "BM101", 3, "Bilgisayar Mühendisliği");
+        Course course2 = new Course("Veritabanı Yönetimi", "BM201", 4, "Bilgisayar Mühendisliği");
+        Course course3 = new Course("Elektrik Devreleri", "EE101", 3, "Elektrik Elektronik Mühendisliği");
+        Course course4 = new Course("Yazılım Geliştirme", "BM301", 5, "Bilgisayar Mühendisliği");
+
+        student1.getCourses().add(course1);
+        student1.getCourses().add(course2);
+        student1.getCourses().add(course3);
+
+        courseService.saveTestData(course1, course2, course3, course4);
+        studentService.saveTestData(student1, student2, student3, student4);
     }
 
     private void addCourse() {
@@ -68,18 +93,14 @@ public class Menu {
         System.out.println("Ders Bölümü : ");
         String department = input.nextLine();
 
-
-
         courseService.addCourse(name, code, credit, department);
     }
 
     private void removeCourse() {
-
         System.out.println("Lütfen silmek istediğiniz kursun ID'sini giriniz...");
-        String code=input.next();
+        String code = input.next();
         courseService.removeCourse(code);
     }
-
 
 
     private void listAllCourses() {
@@ -87,6 +108,8 @@ public class Menu {
     }
 
     private void addStudent() {
+
+//        studentService.addStudent()
     }
 
     private void removeStudent() {

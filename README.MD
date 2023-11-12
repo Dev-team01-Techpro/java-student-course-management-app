@@ -100,10 +100,10 @@ import java.util.Scanner;
 
 public class Menu {
         // Öğrenci sınıfı örneği oluşturma
-        Student student2 = new Student("Ahmet", "Yılmaz", 111, "Bilgisayar Mühendisliği");
+        Student student1 = new Student("Ahmet", "Yılmaz", 111, "Bilgisayar Mühendisliği");
         Student student2 = new Student("Ayşe", "Kaya", 222, "Elektrik Elektronik Mühendisliği");
         Student student3 = new Student("Mehmet", "Öztürk", 333, "Makine Mühendisliği");
-        Student student4 = new Student"Mustafa", "Yılmaz", 123456, "Bilgisayar Mühendisliği");
+        Student student4 = new Student("Mustafa", "Yılmaz", 444, "Bilgisayar Mühendisliği");
 
         // Kurs oluştur
         Course course1 = new Course("Java'ya Giriş", "BM101", 3, "Bilgisayar Mühendisliği");
