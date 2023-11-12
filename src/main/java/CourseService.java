@@ -58,16 +58,19 @@ public class CourseService {
 
     public void removeCourse(String code) {
 
-        String codeDb = getCourseByCode(code);
-
         Session session = HibernateUtilities.openSession();
         HibernateUtilities.beginTransaction(session);
 
-        String hql = "DELETE FROM Course c WHERE c.code=:codeDb";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
+        String hql = "DELETE FROM Course c WHERE c.code=:code";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
         //String hql="FROM Course c WHERE c.code="+id; int degisken icin buna gerek yok.
-        int deleteResult = session.createQuery(hql).setParameter("codeDb", codeDb).executeUpdate();
+        int deleteResult = session.createQuery(hql).setParameter("code", code).executeUpdate();
 
-        System.out.println("deleteResult = " + deleteResult);
+        if (deleteResult>0){
+            System.out.println(" Kayit silindi");
+        }else {
+            System.out.println("Boyle bir kurs bulunamadi");
+        }
+
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
         HibernateUtilities.closeSessionFactory();
@@ -102,5 +105,7 @@ public class CourseService {
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
         HibernateUtilities.closeSessionFactory();
+
     }
+
 }

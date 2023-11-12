@@ -97,7 +97,7 @@ public class Menu {
     }
 
     private void removeCourse() {
-        System.out.println("Lütfen silmek istediğiniz kursun ID'sini giriniz...");
+        System.out.println("Lütfen silmek istediğiniz kursun kodunu giriniz...");
         String code = input.next();
         courseService.removeCourse(code);
     }
@@ -131,9 +131,16 @@ public class Menu {
     }
 
     private void removeStudent() {
+        System.out.println("Lütfen silmek istediğiniz ogrencinin numarasini giriniz...");
+        int studentNumber = input.nextInt();
+        studentService.removeStudent(studentNumber);
+
     }
 
     private void listStudent() {
+
+        studentService.getAllStudents();
+
     }
 
 

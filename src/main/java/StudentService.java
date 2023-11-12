@@ -13,7 +13,7 @@ public class StudentService {
         SessionFactory sf = con.buildSessionFactory();
         Session session = sf.openSession();
         Transaction tx = session.beginTransaction();
-        Student student= new Student(name, surname, studentNumber, department, course);
+        Student student = new Student(name, surname, studentNumber, department, course);
 //       // student.getCourses().add(course);
         session.save(student);
 
@@ -21,7 +21,6 @@ public class StudentService {
         tx.commit();
         session.close();
         sf.close();
-
 
 
 //        Session session = HibernateUtilities.openSession();
@@ -43,6 +42,14 @@ public class StudentService {
         Session session = HibernateUtilities.openSession();
         HibernateUtilities.beginTransaction(session);
 
+        String hqlQuery = "DELETE FROM Student s WHERE s.studentNumber = " + studentNumber;
+        int delete = session.createQuery(hqlQuery).executeUpdate();
+
+        if (delete > 0) {
+            System.out.println("Kayit silindi !");
+        } else {
+            System.out.println("girmis oldugunuz numarada ogrenci bulunamadi...");
+        }
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
@@ -53,6 +60,12 @@ public class StudentService {
         Session session = HibernateUtilities.openSession();
         HibernateUtilities.beginTransaction(session);
 
+        String hqlQuery = "FROM Student";
+        List<Student> stdList = session.createQuery(hqlQuery, Student.class).getResultList();
+        for (Student std : stdList) {
+            System.out.println(std);
+
+        }
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
