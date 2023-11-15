@@ -5,6 +5,15 @@ bölümünü içerecektir. Course sınıfı, bir dersin adını, kodunu, kredisi
 bir "many to many" ilişkisi olacaktır. Yani, her öğrenci birden fazla derse kayıt olabilir ve her ders birden fazla
 öğrenciye ait olabilir.
 
+## İçindekiler
+- [Yapılış Videosu](#yapılış-videosu)
+- [Entity Sınıfları](#entity-sınıfları)
+- [Student Sınıfı](#student-sınıfı)
+- [Course Sınıfı](#ilişki)
+- [StudentService Sınıfı](#studentservice-sınıfı)
+- [CourseService Sınıfı](#courseservice-sınıfı)
+- [Menü Sınıfı](#menü-sınıfı)
+
 ![Proje Diyagrami](Diagram.jpeg)
 
 ## Yapılış Videosu
