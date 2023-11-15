@@ -9,7 +9,7 @@ bir "many to many" ilişkisi olacaktır. Yani, her öğrenci birden fazla derse 
 - [Yapılış Videosu](#yapılış-videosu)
 - [Entity Sınıfları](#entity-sınıfları)
 - [Student Sınıfı](#student-sınıfı)
-- [Course Sınıfı](#ilişki)
+- [Course Sınıfı](#course-sınıfı)
 - [StudentService Sınıfı](#studentservice-sınıfı)
 - [CourseService Sınıfı](#courseservice-sınıfı)
 - [Menü Sınıfı](#menü-sınıfı)
