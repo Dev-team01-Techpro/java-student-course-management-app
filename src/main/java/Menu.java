@@ -21,7 +21,7 @@ public class Menu {
             System.out.println("5. Öğrenci sil");
             System.out.println("6. Öğrencileri listele");
             System.out.println("7. Öğrenci getir");
-            System.out.println("8. Test verileri olustur");
+            System.out.println("8. Test verileri oluştur");
             System.out.println("0. Çıkış");
 
             int choice = input.nextInt();
@@ -140,7 +140,6 @@ public class Menu {
         System.out.println("Lütfen silmek istediğiniz ogrencinin numarasini giriniz...");
         int studentNumber = input.nextInt();
         studentService.removeStudent(studentNumber);
-
     }
 
     private void listStudent() {
