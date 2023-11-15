@@ -11,13 +11,13 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
     private Long id;
-    @Column(name = "course_name")
+    @Column(name = "course_name", nullable = false)
     private String name;
-    @Column(name = "course_code")
+    @Column(name = "course_code", unique = true, nullable = false)
     private String code;
-    @Column(name = "course_credit")
+    @Column(name = "course_credit", nullable = false)
     private int credit;
-    @Column(name = "course_department")
+    @Column(name = "course_department", nullable = false)
     private String department;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

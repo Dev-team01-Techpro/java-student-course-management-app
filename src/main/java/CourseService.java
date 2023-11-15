@@ -6,8 +6,11 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class CourseService {
+
+    private Session session;
+
     public void addCourse(String name, String code, int credit, String department) {
-        Session session = HibernateUtilities.openSession();
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
         Course course = new Course(name, code, credit, department);
@@ -15,11 +18,10 @@ public class CourseService {
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
     }
 
     public String getCourseByCode(String code) {
-        Session session = HibernateUtilities.openSession();
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
         String hql = "FROM Course c WHERE c.code=:code";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
@@ -33,12 +35,11 @@ public class CourseService {
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
         return courseList.get(0).getCode();
     }
 
     public Course getCourse(String code) {
-        Session session = HibernateUtilities.openSession();
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
         String hql = "FROM Course c WHERE c.code=:code";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
@@ -52,33 +53,30 @@ public class CourseService {
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
         return courseList.get(0);
     }
 
     public void removeCourse(String code) {
 
-        Session session = HibernateUtilities.openSession();
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
         String hql = "DELETE FROM Course c WHERE c.code=:code";//:code ile kullanicidan aldigimiz string degiskeni hql sorgusunda kullandik.
         //String hql="FROM Course c WHERE c.code="+id; int degisken icin buna gerek yok.
         int deleteResult = session.createQuery(hql).setParameter("code", code).executeUpdate();
 
-        if (deleteResult>0){
+        if (deleteResult > 0) {
             System.out.println(" Kayit silindi");
-        }else {
+        } else {
             System.out.println("Boyle bir kurs bulunamadi");
         }
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
     }
 
     public void getAllCourses() {
-
-        Session session = HibernateUtilities.openSession();
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
         String hql = "FROM Course";
@@ -90,11 +88,10 @@ public class CourseService {
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
     }
 
     public void saveTestData(Course course1, Course course2, Course course3, Course course4) {
-        Session session = HibernateUtilities.openSession();
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
         session.save(course1);
@@ -104,8 +101,6 @@ public class CourseService {
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
-
     }
 
 }

@@ -6,40 +6,22 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class StudentService {
+    private Session session;
 
     public void addStudent(String name, String surname, int studentNumber, String department, Course course) {
-        Configuration con = new Configuration().configure("hibernate.cfg.xml").
-                addAnnotatedClass(Course.class).addAnnotatedClass(Student.class);
-        SessionFactory sf = con.buildSessionFactory();
-        Session session = sf.openSession();
-        Transaction tx = session.beginTransaction();
+        session = HibernateUtilities.getSessionFactory().openSession();
+        HibernateUtilities.beginTransaction(session);
+
         Student student = new Student(name, surname, studentNumber, department, course);
-//       // student.getCourses().add(course);
+        // student.getCourses().add(course);
         session.save(student);
 
-
-        tx.commit();
-        session.close();
-        sf.close();
-
-
-//        Session session = HibernateUtilities.openSession();
-//        HibernateUtilities.beginTransaction(session);
-//
-//
-//        Student student= new Student(name, surname, studentNumber, department, course);
-//       // student.getCourses().add(course);
-//        session.save(student);
-//
-//        HibernateUtilities.commitTransaction(session);
-//        HibernateUtilities.closeSession(session);
-//        HibernateUtilities.closeSessionFactory();
-
-
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
     }
 
     public void removeStudent(int studentNumber) {
-        Session session = HibernateUtilities.openSession();
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
         String hqlQuery = "DELETE FROM Student s WHERE s.studentNumber = " + studentNumber;
@@ -53,11 +35,10 @@ public class StudentService {
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
     }
 
     public void getAllStudents() {
-        Session session = HibernateUtilities.openSession();
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
         String hqlQuery = "FROM Student";
@@ -72,31 +53,28 @@ public class StudentService {
         HibernateUtilities.closeSessionFactory();
     }
 
-    public int getStudentByNumber(int studentNumber) {
-        Session session = HibernateUtilities.openSession();
+    public Student getStudentByNumber(int studentNumber) {
+        session = HibernateUtilities.getSessionFactory().openSession();
         HibernateUtilities.beginTransaction(session);
 
+        String hql = "FROM Student s WHERE s.studentNumber = " + studentNumber;
+        List<Student> student = session.createQuery(hql, Student.class).getResultList();
 
         HibernateUtilities.commitTransaction(session);
         HibernateUtilities.closeSession(session);
-        HibernateUtilities.closeSessionFactory();
-        return 0;
+        return student.get(0);
     }
 
     public void saveTestData(Student student1, Student student2, Student student3, Student student4) {
-        Configuration con = new Configuration().configure("hibernate.cfg.xml").
-                addAnnotatedClass(Course.class).addAnnotatedClass(Student.class);
-        SessionFactory sf = con.buildSessionFactory();
-        Session session = sf.openSession();
-        Transaction tx = session.beginTransaction();
+        session = HibernateUtilities.getSessionFactory().openSession();
+        HibernateUtilities.beginTransaction(session);
 
         session.save(student1);
         session.save(student2);
         session.save(student3);
         session.save(student4);
 
-        tx.commit();
-        session.close();
-        sf.close();
+        HibernateUtilities.commitTransaction(session);
+        HibernateUtilities.closeSession(session);
     }
 }

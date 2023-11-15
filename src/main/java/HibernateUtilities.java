@@ -5,19 +5,22 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtilities {
 
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
     static {
-        Configuration con = new Configuration().configure("hibernate.cfg.xml").
-                addAnnotatedClass(Course.class).
-                addAnnotatedClass(Student.class);
-        sessionFactory = con.buildSessionFactory();
+        try {
+            Configuration con = new Configuration().configure("hibernate.cfg.xml").
+                    addAnnotatedClass(Course.class).
+                    addAnnotatedClass(Student.class);
+            sessionFactory = con.buildSessionFactory();
+        } catch (Exception e) {
+            System.err.println("Session factory yuklenemedi!");
+        }
     }
 
-    public static Session openSession() {
-        return sessionFactory.openSession();
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
-
     public static void closeSession(Session session) {
         if (session != null) {
             session.close();
@@ -25,9 +28,7 @@ public class HibernateUtilities {
     }
 
     public static void closeSessionFactory() {
-        if (sessionFactory != null) {
-            sessionFactory.close();
-        }
+        getSessionFactory().close();
     }
 
     public static void beginTransaction(Session session) {

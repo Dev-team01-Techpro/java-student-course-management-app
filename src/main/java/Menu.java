@@ -20,7 +20,8 @@ public class Menu {
             System.out.println("4. Öğrenci ekle");
             System.out.println("5. Öğrenci sil");
             System.out.println("6. Öğrencileri listele");
-            System.out.println("7. Test verileri olustur");
+            System.out.println("7. Öğrenci getir");
+            System.out.println("8. Test verileri olustur");
             System.out.println("0. Çıkış");
 
             int choice = input.nextInt();
@@ -45,10 +46,14 @@ public class Menu {
                     listStudent();
                     break;
                 case 7:
+                    getStudent();
+                    break;
+                case 8:
                     saveTest();
                     break;
                 case 0:
                     exit = false;
+                    HibernateUtilities.closeSessionFactory();
                     break;
                 default:
                     System.out.println("Invalid choice");
@@ -56,6 +61,7 @@ public class Menu {
             }
         }
     }
+
 
     private void saveTest() {
         // Öğrenci sınıfı örneği oluşturma
@@ -138,9 +144,13 @@ public class Menu {
     }
 
     private void listStudent() {
-
         studentService.getAllStudents();
+    }
 
+    private void getStudent() {
+        System.out.println("Getirmek istediğiniz öğrenci numarasını giriniz.");
+        int studentNumber = input.nextInt();
+        System.out.println(studentService.getStudentByNumber(studentNumber));
     }
 
 
